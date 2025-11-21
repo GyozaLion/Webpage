@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <style>
+        /* --- SETUP & VARIABLES --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f1f5f9;
+            --text-sec: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animasi Background Sederhana */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* --- HEADER / PROFILE SECTION --- */
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 20px;
+        }
+
+        .bio {
+            color: var(--text-sec);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .social-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--bg-color);
+            background: var(--accent);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .social-btn:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.4);
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .projects-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .projects-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0; /* Hidden for scroll animation */
+            transform: translateY(30px);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: #334155;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            color: var(--text-sec);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0 2rem 0;
+            color: var(--text-sec);
+            font-size: 0.8rem;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+            
+            <h1>Nama Anda</h1>
+            <div class="role">Web Developer & UI Designer</div>
+            <p class="bio">
+                Halo! Saya adalah pengembang web yang antusias membangun pengalaman digital yang interaktif. 
+                Saya suka mengubah ide kompleks menjadi desain yang simpel dan elegan.
+            </p>
+            <a href="mailto:email@anda.com" class="social-btn">Hubungi Saya</a>
+        </header>
+
+        <h2 class="projects-title">Projek Terbaru</h2>
+        
+        <div class="grid">
+            
+            <article class="card">
+                <img src="https://via.placeholder.com/400x200/1e293b/38bdf8?text=Project+1" alt="Project 1" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">E-Commerce Dashboard</h3>
+                    <p class="card-desc">Dashboard admin responsif dengan fitur analitik data real-time dan manajemen stok barang.</p>
+                    <a href="#" class="card-link">Lihat Projek &rarr;</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://via.placeholder.com/400x200/1e293b/38bdf8?text=Project+2" alt="Project 2" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Aplikasi Chat AI</h3>
+                    <p class="card-desc">Aplikasi web berbasis API OpenAI yang memungkinkan pengguna berinteraksi dengan bot cerdas.</p>
+                    <a href="#" class="card-link">Lihat Projek &rarr;</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://via.placeholder.com/400x200/1e293b/38bdf8?text=Project+3" alt="Project 3" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Website Travel Jepang</h3>
+                    <p class="card-desc">Landing page modern untuk agensi travel dengan animasi parallax dan galeri foto.</p>
+                    <a href="#" class="card-link">Lihat Projek &rarr;</a>
+                </div>
+            </article>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Nama Anda. Dibuat dengan ❤️.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Script untuk animasi Scroll (Intersection Observer)
+        // Ini membuat kartu muncul perlahan saat di-scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+</html>
