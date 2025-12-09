@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
+    <title>About Me - Antoni</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         /* --- SETUP & VARIABLES --- */
         :root {
@@ -55,7 +58,9 @@
 
         /* --- HEADER / PROFILE SECTION --- */
         header {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 4rem 0;
             animation: fadeInDown 1s ease-out;
         }
@@ -94,26 +99,117 @@
         .bio {
             color: var(--text-sec);
             max-width: 600px;
-            margin: 0 auto 2rem auto;
+            text-align: center;
+            margin: 0 auto 3rem auto; /* Margin bawah diperbesar untuk memberi ruang ke 3D Tiles */
         }
 
-        .social-btn {
-            display: inline-block;
+        /* --- 3D SOCIAL TILES (DARI VIDEO) --- */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* Agar tidak nabrak elemen lain karena efek skew */
+            margin-bottom: 50px; 
+        }
+
+        .social-list {
+            position: relative;
+            transform: skewY(-15deg); /* Efek miring isometrik */
+            list-style: none;
+        }
+
+        .social-list li {
+            position: relative;
+            width: 200px; /* Lebar balok */
+            background: #3e3f46;
+            padding: 15px;
+            /* REVISI: Margin diperbesar dari 10px ke 30px agar tidak rapat */
+            margin: 0 0 30px 0; 
+            z-index: calc(1 * var(--i));
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        /* Efek Hover: Balok bergeser ke kiri-atas & berubah warna */
+        .social-list li:hover {
+            background: var(--clr);
+            transform: translateX(-50px);
+        }
+
+        /* Sisi Kiri (Ketebalan) */
+        .social-list li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -40px;
+            width: 40px;
+            height: 100%;
+            background: #2e2e2e;
+            transform-origin: right;
+            transform: skewY(45deg);
+            transition: 0.5s;
+        }
+
+        .social-list li:hover::before {
+            background: var(--clr);
+            filter: brightness(0.8);
+        }
+
+        /* Sisi Atas (Ketebalan) */
+        .social-list li::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: #353535;
+            transform-origin: bottom;
+            transform: skewX(45deg);
+            transition: 0.5s;
+        }
+
+        .social-list li:hover::after {
+            background: var(--clr);
+            filter: brightness(0.6);
+        }
+
+        /* Styling Link dan Ikon di dalam Balok */
+        .social-list li a {
             text-decoration: none;
-            color: var(--bg-color);
-            background: var(--accent);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            color: #999;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
             font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        .social-btn:hover {
-            background: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(255,255,255,0.4);
+        .social-list li:hover a {
+            color: #fff;
         }
+
+        .social-list li a span {
+            position: absolute;
+            top: 0;
+            left: -40px;
+            width: 40px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            color: #fff;
+            opacity: 0.5;
+            transition: 0.5s;
+        }
+
+        .social-list li:hover a span {
+            opacity: 1;
+        }
+        /* --- END 3D TILES --- */
+
 
         /* --- PROJECTS SECTION --- */
         .projects-title {
@@ -146,7 +242,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            opacity: 0; /* Hidden for scroll animation */
+            opacity: 0; 
             transform: translateY(30px);
         }
 
@@ -215,6 +311,8 @@
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
             .container { padding: 1rem; }
+            /* Kecilkan ukuran 3D tiles di HP agar tidak melebar keluar */
+            .social-list { transform: skewY(-15deg) scale(0.8); }
         }
     </style>
 </head>
@@ -222,23 +320,44 @@
 
     <div class="container">
         <header>
-            <img src="images/ppaja.png" alt="lsgov" class="card-img">
+            <img src="images/ppaja.png" alt="Profile" class="card-img profile-img">
             
             <h1>Antoni</h1>
             <div class="role">Web Developer & Engineer</div>
             <p class="bio">
                 Halo! Saya adalah seorang mechanical engineer yang juga tertarik dengan dunia digital UI/UX
             </p>
-            <a href="mailto:antoniuspbm@gmail.com" class="social-btn">Hubungi Saya</a>
-            <!-- <a href="antoniuspbm@gmail.com" class="social-btn">Hubungi Saya</a> -->
-        </header>
+
+            <div class="social-container">
+                <ul class="social-list">
+                    <!-- <li style="--i:3; --clr:#25d366;">
+                        <a href="https://wa.me/YOURNUMBER">
+                            <span><i class="fa-brands fa-whatsapp"></i></span>
+                            WhatsApp
+                        </a>
+                    </li> -->
+                    <li style="--i:2; --clr:#e4405f;">
+                        <a href="https://www.instagram.com/andri_gly">
+                            <span><i class="fa-brands fa-instagram"></i></span>
+                            Instagram
+                        </a>
+                    </li>
+                    <li style="--i:1; --clr:#ea4335;">
+                        <a href="mailto:antoniuspbm@gmail.com">
+                            <span><i class="fa-solid fa-envelope"></i></span>
+                            Email Me
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            </header>
 
         <h2 class="projects-title">Projek Terbaru</h2>
         
         <div class="grid">
             
             <article class="card">
-                <img src="images/TinkerCad.png" alt="lsgov" class="card-img">
+                <img src="images/TinkerCad.png" alt="Arduino L2C" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">Arduino L2C display</h3>
                     <p class="card-desc">Sebuah Project kecil untuk wiring program.</p>
@@ -247,7 +366,7 @@
             </article>
 
             <article class="card">
-                <img src="images/12345.png" alt="lsgov" class="card-img">
+                <img src="images/12345.png" alt="Logic Gate" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">Logic Gate Signal Visualizer</h3>
                     <p class="card-desc">Aplikasi web berbasis API untuk memvisualisasikan bagaimana logic gate signal bekerja.</p>
@@ -256,7 +375,7 @@
             </article>
 
              <article class="card">
-                <img src="images/TinkerCad2.png" alt="lsgov" class="card-img">
+                <img src="images/TinkerCad2.png" alt="TinkerCad 1" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">TinkerCad Project 1</h3>
                     <p class="card-desc">Project Led Cycle dengan algoritma timing.</p>
@@ -265,7 +384,7 @@
             </article>
 
             <article class="card">
-                <img src="images/TinkerCad3.png" alt="lsgov" class="card-img">
+                <img src="images/TinkerCad3.png" alt="TinkerCad 2" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">TinkerCad Project 2</h3>
                     <p class="card-desc">Project High Low button Tinker Cad dengan LED sebagai indikator.</p>
@@ -274,24 +393,13 @@
             </article>
 
             <article class="card">
-                <img src="images/TinkerCad3.png" alt="lsgov" class="card-img">
+                <img src="images/TinkerCad3.png" alt="Ultrasonic" class="card-img">
                 <div class="card-content">
-                    <h3 class="card-title">TinkerCad Project 2</h3>
+                    <h3 class="card-title">Ultrasonic Range</h3>
                     <p class="card-desc">Project Ultrasonic Range finder dengan display system liquid crystal</p>
                     <a href="https://www.tinkercad.com/things/09CTCVcR1C8-ultrasonic-range-display" class="card-link">Lihat Projek &rarr;</a>
                 </div>
             </article>
-
-
-            
-            <!-- <article class="card">
-                <img src="images/lsgov.png" alt="lsgov" class="card-img">
-                <div class="card-content">
-                    <h3 class="card-title">Website Travel Jepang</h3>
-                    <p class="card-desc">Landing page modern untuk agensi travel dengan animasi parallax dan galeri foto.</p>
-                    <a href="#" class="card-link">Lihat Projek &rarr;</a>
-                </div>
-            </article> -->
 
         </div>
 
@@ -302,7 +410,6 @@
 
     <script>
         // Script untuk animasi Scroll (Intersection Observer)
-        // Ini membuat kartu muncul perlahan saat di-scroll
         const observerOptions = {
             threshold: 0.1
         };
