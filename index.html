@@ -100,44 +100,40 @@
             color: var(--text-sec);
             max-width: 600px;
             text-align: center;
-            margin: 0 auto 3rem auto; /* Margin bawah diperbesar untuk memberi ruang ke 3D Tiles */
+            margin: 0 auto 3rem auto;
         }
 
-        /* --- 3D SOCIAL TILES (DARI VIDEO) --- */
+        /* --- 3D SOCIAL TILES --- */
         .social-container {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            /* Agar tidak nabrak elemen lain karena efek skew */
             margin-bottom: 50px; 
         }
 
         .social-list {
             position: relative;
-            transform: skewY(-15deg); /* Efek miring isometrik */
+            transform: skewY(-15deg);
             list-style: none;
         }
 
         .social-list li {
             position: relative;
-            width: 200px; /* Lebar balok */
+            width: 200px;
             background: #3e3f46;
             padding: 15px;
-            /* REVISI: Margin diperbesar dari 10px ke 30px agar tidak rapat */
             margin: 0 0 30px 0; 
             z-index: calc(1 * var(--i));
             transition: 0.5s;
             cursor: pointer;
         }
 
-        /* Efek Hover: Balok bergeser ke kiri-atas & berubah warna */
         .social-list li:hover {
             background: var(--clr);
             transform: translateX(-50px);
         }
 
-        /* Sisi Kiri (Ketebalan) */
         .social-list li::before {
             content: '';
             position: absolute;
@@ -156,7 +152,6 @@
             filter: brightness(0.8);
         }
 
-        /* Sisi Atas (Ketebalan) */
         .social-list li::after {
             content: '';
             position: absolute;
@@ -175,7 +170,6 @@
             filter: brightness(0.6);
         }
 
-        /* Styling Link dan Ikon di dalam Balok */
         .social-list li a {
             text-decoration: none;
             color: #999;
@@ -208,13 +202,12 @@
         .social-list li:hover a span {
             opacity: 1;
         }
-        /* --- END 3D TILES --- */
-
 
         /* --- PROJECTS SECTION --- */
         .projects-title {
             text-align: center;
             margin-bottom: 3rem;
+            margin-top: 4rem; /* Jarak tambahan dari section sebelumnya */
             font-size: 2rem;
             position: relative;
         }
@@ -241,9 +234,10 @@
             overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             opacity: 0; 
             transform: translateY(30px);
+            display: block; /* Penting agar <a> card bekerja dengan benar */
         }
 
         .card.visible {
@@ -294,6 +288,51 @@
             text-decoration: underline;
         }
 
+        /* --- STYLE BARU UNTUK ARSIP (ARCHIVE) --- */
+        /* Link/Card Arsip tidak perlu dekorasi garis bawah */
+        a.card {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Konten khusus card arsip agar rapi tanpa gambar */
+        .archive-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .archive-content h3 {
+            color: var(--accent); /* Judul warna biru accent */
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .archive-content p {
+            color: var(--text-sec);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Ikon panah kecil di pojok kanan atas arsip */
+        .archive-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--text-sec);
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        a.card:hover .archive-icon {
+            color: var(--accent);
+            opacity: 1;
+            transform: translate(3px, -3px);
+        }
+
         footer {
             text-align: center;
             padding: 4rem 0 2rem 0;
@@ -311,7 +350,6 @@
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
             .container { padding: 1rem; }
-            /* Kecilkan ukuran 3D tiles di HP agar tidak melebar keluar */
             .social-list { transform: skewY(-15deg) scale(0.8); }
         }
     </style>
@@ -330,12 +368,6 @@
 
             <div class="social-container">
                 <ul class="social-list">
-                    <!-- <li style="--i:3; --clr:#25d366;">
-                        <a href="https://wa.me/YOURNUMBER">
-                            <span><i class="fa-brands fa-whatsapp"></i></span>
-                            WhatsApp
-                        </a>
-                    </li> -->
                     <li style="--i:2; --clr:#e4405f;">
                         <a href="https://www.instagram.com/andri_gly">
                             <span><i class="fa-brands fa-instagram"></i></span>
@@ -350,7 +382,7 @@
                     </li>
                 </ul>
             </div>
-            </header>
+        </header>
 
         <h2 class="projects-title">Projek Terbaru</h2>
         
@@ -368,13 +400,13 @@
             <article class="card">
                 <img src="images/12345.png" alt="Logic Gate" class="card-img">
                 <div class="card-content">
-                    <h3 class="card-title">Logic Gate Signal Visualizer</h3>
-                    <p class="card-desc">Aplikasi web berbasis API untuk memvisualisasikan bagaimana logic gate signal bekerja.</p>
+                    <h3 class="card-title">Logic Gate Visualizer</h3>
+                    <p class="card-desc">Aplikasi web berbasis API untuk visualisasi logic gate signal.</p>
                     <a href="https://gyozalion.github.io/simulation/" class="card-link">Lihat Projek &rarr;</a>
                 </div>
             </article>
 
-             <article class="card">
+            <article class="card">
                 <img src="images/TinkerCad2.png" alt="TinkerCad 1" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">TinkerCad Project 1</h3>
@@ -383,23 +415,35 @@
                 </div>
             </article>
 
-            <article class="card">
-                <img src="images/TinkerCad3.png" alt="TinkerCad 2" class="card-img">
-                <div class="card-content">
-                    <h3 class="card-title">TinkerCad Project 2</h3>
-                    <p class="card-desc">Project High Low button Tinker Cad dengan LED sebagai indikator.</p>
-                    <a href="https://www.tinkercad.com/things/fe5qcvYSeVP-swanky-bombul-wluff?sharecode=undefined" class="card-link">Lihat Projek &rarr;</a>
-                </div>
-            </article>
+        </div>
 
-            <article class="card">
-                <img src="images/TinkerCad3.png" alt="Ultrasonic" class="card-img">
-                <div class="card-content">
-                    <h3 class="card-title">Ultrasonic Range</h3>
-                    <p class="card-desc">Project Ultrasonic Range finder dengan display system liquid crystal</p>
-                    <a href="https://www.tinkercad.com/things/09CTCVcR1C8-ultrasonic-range-display" class="card-link">Lihat Projek &rarr;</a>
+        <h2 class="projects-title">Arsip Projek</h2>
+
+        <div class="grid">
+            
+            <a href="https://www.tinkercad.com/things/fe5qcvYSeVP-swanky-bombul-wluff" class="card" target="_blank">
+                <div class="archive-content">
+                    <i class="fa-solid fa-arrow-up-right-from-square archive-icon"></i>
+                    <h3>TinkerCad Project 2</h3>
+                    <p>Project High Low button Tinker Cad dengan LED sebagai indikator.</p>
                 </div>
-            </article>
+            </a>
+
+            <a href="https://www.tinkercad.com/things/09CTCVcR1C8-ultrasonic-range-display" class="card" target="_blank">
+                <div class="archive-content">
+                    <i class="fa-solid fa-arrow-up-right-from-square archive-icon"></i>
+                    <h3>Ultrasonic Range</h3>
+                    <p>Project Ultrasonic Range finder dengan display system liquid crystal.</p>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="archive-content">
+                    <i class="fa-solid fa-arrow-up-right-from-square archive-icon"></i>
+                    <h3>Old Portfolio</h3>
+                    <p>Versi lama dari portofolio web saya yang dibuat dengan HTML dasar.</p>
+                </div>
+            </a>
 
         </div>
 
@@ -422,6 +466,7 @@
             });
         }, observerOptions);
 
+        // Memilih semua elemen dengan class 'card' (baik di Terbaru maupun Arsip)
         document.querySelectorAll('.card').forEach(card => {
             observer.observe(card);
         });
